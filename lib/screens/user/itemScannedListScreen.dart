@@ -329,14 +329,14 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Lot/Batch Number: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                           FontWeight.bold)),
                                                   TextSpan(
                                                       text: _items2[index]['lot_number'],
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -374,7 +374,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                               // ? _items2[index]['expiry'] // Assuming _items[index].expiry is a String
                                                               // : "null",
                                                           style: TextStyle(
-                                                            fontSize: 14,
+                                                            fontSize: 15,
                                                             color: Colors.black,
                                                           ),
                                                         ),
@@ -437,7 +437,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                               _items2[index]['barcode'].toString(),
                                                               _items2[index]['itemcode'].toString(),
                                                               _items2[index]['uom'].toString(),
-                                                              _items2[index]['lotno'].toString(),
+                                                              _items2[index]['lot_number'].toString(),
                                                               // _items2[index]['batno'].toString(),
                                                               _items2[index]['expiry'].toString(),
                                                               _items2[index]['qty'].toString(),
@@ -556,14 +556,14 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Datetime Scanned: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   TextSpan(
                                                       text: "${_items[index].dateTimeCreated!}",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -574,14 +574,14 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Datetime Saved: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   TextSpan(
                                                       text: "${_items[index].dateTimeSaved!}",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -592,7 +592,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   child: Text(
                                                     _items[index].description!,
                                                     style:
-                                                        TextStyle(fontSize: 23),
+                                                        TextStyle(fontSize: 25),
                                                     // maxLines: 1,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -622,14 +622,14 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Barcode: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   TextSpan(
                                                       text: "${_items[index].barcode!}",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -640,14 +640,14 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Itemcode: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   TextSpan(
                                                       text: "${_items[index].itemcode!}",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -658,14 +658,14 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Unit of Measure: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   TextSpan(
                                                       text: "${_items[index].uom!}",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -676,7 +676,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Lot/Batch Number: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight:
                                                           FontWeight.bold)),
@@ -685,7 +685,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                           ? _items[index].lotno
                                                           : "null",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),
@@ -715,7 +715,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                 TextSpan(
                                                 text: "Expiry Date: ",
                                                 style: TextStyle(
-                                                  fontSize: 14,
+                                                  fontSize: 15,
                                                   color: Colors.blue,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -725,7 +725,7 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                         ? formatDate(_items[index].expiry)
                                                         : "null",
                                                     style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 15,
                                                       color: Colors.black,
                                                     ),
                                                   ),
@@ -740,13 +740,13 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                                                   TextSpan(
                                                       text: "Quantity: ",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.blue,
                                                           fontWeight: FontWeight.bold)),
                                                   TextSpan(
                                                       text: "${_items[index].qty!}",
                                                       style: TextStyle(
-                                                          fontSize: 14,
+                                                          fontSize: 15,
                                                           color: Colors.black))
                                                 ],
                                               ),

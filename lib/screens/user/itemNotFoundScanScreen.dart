@@ -523,7 +523,7 @@ class _ItemNotFoundScanScreenState extends State<ItemNotFoundScanScreen> {
                                             TextSpan(
                                                 text: "Lot/Batch Number: ",
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    fontSize: 15,
                                                     color: Colors.blue,
                                                     fontWeight:
                                                     FontWeight.bold)),
@@ -532,7 +532,7 @@ class _ItemNotFoundScanScreenState extends State<ItemNotFoundScanScreen> {
                                                     ? itemNotFound[index].lotno
                                                     : "null",
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    fontSize: 15,
                                                     color: Colors.black))
                                           ],
                                         ),
@@ -562,7 +562,7 @@ class _ItemNotFoundScanScreenState extends State<ItemNotFoundScanScreen> {
                                             TextSpan(
                                               text: "Expiry Date: ",
                                               style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 15,
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -572,7 +572,7 @@ class _ItemNotFoundScanScreenState extends State<ItemNotFoundScanScreen> {
                                                   ? formatDate(itemNotFound[index].expiry)
                                                   : "null",
                                               style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 15,
                                                 color: Colors.black,
                                               ),
                                             ),
