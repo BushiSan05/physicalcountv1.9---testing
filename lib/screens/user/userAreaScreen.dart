@@ -34,6 +34,7 @@ class _UserAreaScreenState extends State<UserAreaScreen> with SingleTickerProvid
   List _assignArea = [];
   bool checking = true;
   List countType = [];
+  List ctype = [];
   bool checkingData = false;
   bool btnSyncClick = false;
   int indexClick = -1;
@@ -149,6 +150,7 @@ class _UserAreaScreenState extends State<UserAreaScreen> with SingleTickerProvid
                         itemBuilder: (context, index) {
                           var data = _assignArea;
                           var countData = countType;
+                          var cdata = ctype;
                           return Padding(
                             padding:
                                 const EdgeInsets.only(right: 8.0, left: 8.0),
@@ -239,6 +241,11 @@ class _UserAreaScreenState extends State<UserAreaScreen> with SingleTickerProvid
                                                 Text(
                                                   // 'Count Type: ' + countData[index]['countType'],
                                                   'Count Type: ' + (index < countData.length ? countData[index]['countType'] : 'Invalid Index'),
+                                                  style: TextStyle(color: Colors.deepOrange, fontSize: 12),
+                                                ),
+                                                Text(
+                                                  // 'Type: ' + cdata[index]['ctype'],
+                                                  'Count Category: ' + (index < cdata.length ? cdata[index]['ctype'] : 'Invalid Index'),
                                                   style: TextStyle(color: Colors.deepOrange, fontSize: 12),
                                                 ),
                                                 Text(
@@ -552,9 +559,12 @@ class _UserAreaScreenState extends State<UserAreaScreen> with SingleTickerProvid
     _assignArea = await _sqfliteDBHelper.selectUserArea(GlobalVariables.logEmpNo, sul.server(ServerUrl.urlCI));
     print('mao ni assign area');
     print(_assignArea);
-    countType = [];
+
+    // countType = [];
+    // ctype = [];
     countType = await _sqfliteDBHelper.getCountTypeDate(GlobalVariables.logEmpNo);
-    
+    ctype = await _sqfliteDBHelper.getCountTypeDate(GlobalVariables.logEmpNo);
+
     // List _loc = await _sqfliteDBHelper.selectU(GlobalVariables.logEmpNo);
     // // print(GlobalVariables.logEmpNo);
     // print(_loc);
@@ -565,6 +575,10 @@ class _UserAreaScreenState extends State<UserAreaScreen> with SingleTickerProvid
       var user = int.parse(GlobalVariables.logEmpNo) * 1;
       _assignArea = await _sqfliteDBHelper.selectUserArea(user.toString(), sul.server(ServerUrl.urlCI));
       countType = await _sqfliteDBHelper.getCountTypeDate(user.toString());
+      ctype = await _sqfliteDBHelper.getCountTypeDate(user.toString());
+      print(countType);
+      print("-------");
+      print(ctype);
       //checking = false;
       if (mounted) setState(() {});
     }
