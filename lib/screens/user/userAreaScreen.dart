@@ -245,7 +245,7 @@ class _UserAreaScreenState extends State<UserAreaScreen> with SingleTickerProvid
                                                 ),
                                                 Text(
                                                   // 'Type: ' + cdata[index]['ctype'],
-                                                  'Count Category: ' + (index < cdata.length ? cdata[index]['ctype'] : 'Invalid Index'),
+                                                  'Category: ' + (index < cdata.length ? cdata[index]['ctype'] : 'Invalid Index'),
                                                   style: TextStyle(color: Colors.deepOrange, fontSize: 12),
                                                 ),
                                                 Text(
