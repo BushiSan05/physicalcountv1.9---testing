@@ -98,7 +98,6 @@ Future checkConnection() async {
 
 
     Future getAdmin(String haveFilter, String filters) async {
-
       var url = Uri.parse(AppUpdateVersion.urlCICheckUpdate + "mapi/getAdmin");
       final response = await retry(
              () => http.post(url, headers: {

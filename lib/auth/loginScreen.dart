@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -476,32 +475,42 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
           );
         }
         else {
-          var ls2 = await _sqfliteDBHelper.selectAdminWhere(empnoController.text.trim(), emppinController.text.trim());
-          if(ls2.isNotEmpty){
-            print("ADMIN :: $ls2");
-            _log.date     = dateFormat.format(DateTime.now());
-            _log.time     = timeFormat.format(DateTime.now());
-            _log.device   = "${GlobalVariables.deviceInfo}(${GlobalVariables.readdeviceInfo})";
-            _log.user     = "${ls2[0]['emp_name']}";
-            _log.empid    = "${empnoController.text}";
-            _log.details  = "[LOGIN][Admin Login]";
-            await _sqfliteDBHelper.insertLog(_log);
-            print('Business Unit :: ${ls2[0]['business_unit']}');
-            Navigator.push(
+          instantMsgModal(
               context,
-              MaterialPageRoute(builder: (context) => AdminDashboardScreen(user: "${ls2[0]['emp_name']}", id: "${empnoController.text}", businessUnit: '${ls2[0]['business_unit']}')),
-            );
-          }else{
-            instantMsgModal(
-                context,
-                Icon(
-                  CupertinoIcons.exclamationmark_circle,
-                  color: Colors.red,
-                  size: 40,
-                ),
-                Text("Invalid Credentials."));
-          }
+              Icon(
+                CupertinoIcons.exclamationmark_circle,
+                color: Colors.red,
+                size: 40,
+              ),
+              Text("Invalid Credentials."));
         }
+        // {
+        //   var ls2 = await _sqfliteDBHelper.selectAdminWhere(empnoController.text.trim(), emppinController.text.trim());
+        //   if(ls2.isNotEmpty){
+        //     print("ADMIN :: $ls2");
+        //     _log.date     = dateFormat.format(DateTime.now());
+        //     _log.time     = timeFormat.format(DateTime.now());
+        //     _log.device   = "${GlobalVariables.deviceInfo}(${GlobalVariables.readdeviceInfo})";
+        //     _log.user     = "${ls2[0]['emp_name']}";
+        //     _log.empid    = "${empnoController.text}";
+        //     _log.details  = "[LOGIN][Admin Login]";
+        //     await _sqfliteDBHelper.insertLog(_log);
+        //     print('Business Unit :: ${ls2[0]['business_unit']}');
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => AdminDashboardScreen(user: "${ls2[0]['emp_name']}", id: "${empnoController.text}", businessUnit: '${ls2[0]['business_unit']}')),
+        //     );
+        //   }else{
+        //     instantMsgModal(
+        //         context,
+        //         Icon(
+        //           CupertinoIcons.exclamationmark_circle,
+        //           color: Colors.red,
+        //           size: 40,
+        //         ),
+        //         Text("Invalid Credentials."));
+        //   }
+        // }
       }
     }
   }

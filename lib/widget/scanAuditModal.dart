@@ -98,9 +98,11 @@ scanAuditModal(BuildContext context, SqfliteDBHelper db, String details) {
                         var ls = await db.selectAuditWhere(
                             auditempnoController.text.trim(),
                             GlobalVariables.currentLocationID);
+
                         print('LOCATION ID:  ${GlobalVariables.currentLocationID} ');
-                        GlobalVariables.logAuditName= ls[0]['name'];
-                        if (ls.length > 0) {
+
+                        if (ls != null && ls.isNotEmpty) {
+                          GlobalVariables.logAuditName= ls[0]['name'];
                           //logs
                           _log.date    = dateFormat.format(DateTime.now());
                           _log.time    = timeFormat.format(DateTime.now());
@@ -112,6 +114,8 @@ scanAuditModal(BuildContext context, SqfliteDBHelper db, String details) {
                           GlobalVariables.isAuditLogged = true;
                           Navigator.pop(context);
                         } else {
+                          print("mao ni ls");
+                          print(ls);
                           instantMsgModal(
                               context,
                               Icon(
@@ -119,7 +123,7 @@ scanAuditModal(BuildContext context, SqfliteDBHelper db, String details) {
                                 color: Colors.red,
                                 size: 40,
                               ),
-                              Text("Audit Employee Number not found."));
+                              Text("Invalid Audit Employee."));
                           auditempnoController.clear();
                           myFocusNodeAuditEmpNo.requestFocus();
                         }

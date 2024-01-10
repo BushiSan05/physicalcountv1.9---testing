@@ -15,6 +15,8 @@ import 'package:physicalcountv2/widget/instantMsgModal.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 import 'dart:ui' as ui;
 
+import '../../widget/scanRovingITModal.dart';
+
 class SyncScannedItemScreen extends StatefulWidget {
   const SyncScannedItemScreen({Key? key}) : super(key: key);
 
@@ -166,34 +168,61 @@ class _SyncScannedItemScreenState extends State<SyncScannedItemScreen> with Sing
                       color: Colors.white,
                     ),
                     Text(
-                      "Start to sync",
+                      " Start to sync",
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ],
                 ),
               ),
               onPressed: () async {
-                if(btn_sync){
+                await scanRovingITModal(context, _sqfliteDBHelper);
+                if (GlobalVariables.isRovingITAccess) {
+                  GlobalVariables.isRovingITAccess = false;
+                if(btn_sync) {
                   btn_sync = false;
                   //var res = "connected";
-                  var res = await checkConnection();
-                  print('RES: $res');
-                  if (res == 'connected') {
-                    final dataUser = await signatureUserGlobalKey.currentState!
-                        .toImage(pixelRatio: 2.0); //3.0
-                    final bytesUser =
-                    await dataUser.toByteData(format: ui.ImageByteFormat.png);
-                    final dataAudit = await signatureAuditGlobalKey.currentState!
-                        .toImage(pixelRatio: 2.0); //3.0
-                    final bytesAudit =
-                    await dataAudit.toByteData(format: ui.ImageByteFormat.png);
-                    // print(signatureAuditGlobalKey.currentState!.toPathList());
-                    // if (bytesUser!.buffer.lengthInBytes == 6864 ||
-                    //     bytesAudit!.buffer.lengthInBytes == 6864) {
-                    if (signatureUserGlobalKey.currentState!.toPathList().length ==
-                        0 ||
-                        signatureAuditGlobalKey.currentState!.toPathList().length ==
-                            0) {
+
+                    var res = await checkConnection();
+                    print('RES: $res');
+                    if (res == 'connected') {
+                      final dataUser = await signatureUserGlobalKey.currentState!.toImage(pixelRatio: 2.0); //3.0
+
+                      final bytesUser = await dataUser.toByteData(format: ui.ImageByteFormat.png);
+
+                      final dataAudit = await signatureAuditGlobalKey.currentState!.toImage(pixelRatio: 2.0); //3.0
+
+                      final bytesAudit = await dataAudit.toByteData(format: ui.ImageByteFormat.png);
+
+                      // print(signatureAuditGlobalKey.currentState!.toPathList());
+                      // if (bytesUser!.buffer.lengthInBytes == 6864 ||
+                      //     bytesAudit!.buffer.lengthInBytes == 6864) {
+
+                      if (signatureUserGlobalKey.currentState!.toPathList().length == 0 ||
+                          signatureAuditGlobalKey.currentState!.toPathList().length == 0) {
+                        instantMsgModal(
+                            context,
+                            Icon(
+                              CupertinoIcons.exclamationmark_circle,
+                              color: Colors.red,
+                              size: 40,
+                            ),
+                            Text(
+                                "User signature and Auditor signature are required to be signed before syncing."));
+                        btn_sync = true;
+                      } else {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => SyncScreen(passbytesUser: bytesUser!.buffer.asUint8List().toString(),passbytesAudit: bytesAudit!.buffer.asUint8List().toString())),
+                        // ).then((result){
+                        // });
+                        userSignature = base64Encode(bytesUser!.buffer.asUint8List());
+                        auditSignature = base64Encode(bytesAudit!.buffer.asUint8List());
+                        continueSync(base64Encode(bytesUser!.buffer.asUint8List()), base64Encode(bytesAudit!.buffer.asUint8List()));
+                      }
+                    } else {
+                      setState(() {
+                        btn_sync = true;
+                      });
                       instantMsgModal(
                           context,
                           Icon(
@@ -201,29 +230,8 @@ class _SyncScannedItemScreenState extends State<SyncScannedItemScreen> with Sing
                             color: Colors.red,
                             size: 40,
                           ),
-                          Text("User signature and Auditor signature are required to signed before syncing."));
-                      btn_sync = true;
-                    } else {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => SyncScreen(passbytesUser: bytesUser!.buffer.asUint8List().toString(),passbytesAudit: bytesAudit!.buffer.asUint8List().toString())),
-                      // ).then((result){
-                      // });
-                      userSignature = base64Encode(bytesUser!.buffer.asUint8List());
-                      auditSignature = base64Encode(bytesAudit!.buffer.asUint8List());
-                      continueSync(base64Encode(bytesUser!.buffer.asUint8List()),
-                          base64Encode(bytesAudit!.buffer.asUint8List()));
+                          Text("No Connection. Please connect to a network."));
                     }
-                  }else{
-                    instantMsgModal(
-                        context,
-                        Icon(
-                          CupertinoIcons.exclamationmark_circle,
-                          color: Colors.red,
-                          size: 40,
-                        ),
-                        Text("No Connection. Please connect to a network."));
-                    btn_sync = true;
                   }
                 }
               },

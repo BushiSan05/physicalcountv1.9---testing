@@ -136,15 +136,15 @@ class _ItemScannedListScreenState extends State<ItemScannedListScreen> {
                         fontWeight: FontWeight.bold)),
                 WidgetSpan(
                     child: SizedBox.fromSize(
-                  size: Size(98, 22),
-                    child: IconButton(
-                    icon: new Icon(Icons.search, color: Colors.black),
-                    padding: EdgeInsets.only(left: 0),
-                    onPressed: () {
-                      _refreshItemList();
-                      showDialog(
-                        barrierDismissible: false,
-                        context: context,
+                       size: Size(98, 22),
+                       child: IconButton(
+                          icon: new Icon(Icons.search, color: Colors.black),
+                          padding: EdgeInsets.only(left: 0),
+                          onPressed: () {
+                        _refreshItemList();
+                          showDialog(
+                          barrierDismissible: false,
+                          context: context,
                         builder: (BuildContext context) {
                           // return object of type Dialog
                           return CupertinoAlertDialog(

@@ -82,8 +82,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
                     );
                   }),
                   Divider(),
-                  GlobalVariables.byCategory == true && GlobalVariables.byVendor ==
-                              true //------BY CATEGORY == TRUE AND BY VENDOR = TRUE------//
+                  GlobalVariables.byCategory == true && GlobalVariables.byVendor == true //------BY CATEGORY == TRUE AND BY VENDOR = TRUE------//
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: RichText(

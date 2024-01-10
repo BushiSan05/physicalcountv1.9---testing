@@ -634,12 +634,26 @@ class SqfliteDBHelper {
      return db.rawQuery("SELECT countType FROM filter WHERE location_id = '$location_id' ");
   }
 
-  Future getCountTypeDate(String emp_no)async{
+  Future getCountTypeDate(String emp_no, String business_unit)async{
     var db = await database;
+
+    // Calculate the date range for a week before and after the current date
+    DateTime currentDate = DateTime.now();
+    DateTime weekBefore = currentDate.subtract(Duration(days: 7));
+    DateTime weekAfter = currentDate.add(Duration(days: 7));
+
+    // Format the dates to the SQLite date format (YYYY-MM-DD)
+    String formattedWeekBefore = weekBefore.toIso8601String().split('T')[0];
+    String formattedWeekAfter = weekAfter.toIso8601String().split('T')[0];
+
+
     return db.rawQuery("SELECT user.emp_no, user.location_id, fil.batchDate, fil.countType, fil.ctype "
                        "FROM users AS user "
                        "INNER JOIN filter AS fil ON user.location_id = fil.location_id "
-                       "WHERE user.emp_no = '$emp_no' ");
+                       "INNER JOIN locations AS loc ON user.location_id = loc.location_id "
+                       "WHERE loc.business_unit = '$business_unit' "
+                       // "AND fil.batchDate BETWEEN '$formattedWeekBefore' AND '$formattedWeekAfter'"
+                       "AND user.emp_no = '$emp_no' ");
   }
 
   Future updateItemNotFoundByLocation(String locationid, String column) async {
